@@ -16,8 +16,30 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+
+  // base case, 'in' is null (no more items)
+  if (in == nullptr) {
+    return;
+  }
+
+  // get the next node and then continue recursive step
+  Node* curr_node = in;
+  in = in->next;
+  curr_node->next = nullptr;
+
+  split(in, odds, evens);  
+
+  // check if the current value is even or odd with modulo
+  if (curr_node->value % 2 == 0) {
+    // add to evens linked list
+    curr_node->next = evens;
+    evens = curr_node;
+  } else {
+    // add to odds linked list
+    curr_node->next = odds;
+    odds = curr_node;
+  }
+  
 }
 
 /* If you needed a helper function, write it here */
